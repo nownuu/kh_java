@@ -18,7 +18,7 @@ public class Test04 {
 			System.out.println("무임승차 가능");
 		}
 		if(!noage){
-			System.out.println("돈을 내라");1
+			System.out.println("돈을 내라");
 		}
 	}
 }

@@ -36,7 +36,7 @@ public class Test11 {
 		
 		float total = money - sale;
 		int totalM = (int)( day * total);
-		System.out.println("여행 비용 : " + totalM);
+		System.out.println("할인 받은 여행 비용 : " + totalM);
 		
 	}
 }

@@ -13,7 +13,6 @@ public class Test04 {
 		while(true) {
 			System.out.println("숫자 입력");
 			int number = sc.nextInt();
-			
 			System.out.println(number); 
 			
 			if(number == 0) {

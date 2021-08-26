@@ -12,36 +12,25 @@ public class Test14 {
 		}
 		
 		// 1번 문제
-		
-		System.out.println("회전 한 결과");
-		int temp = data[0];
-		data[0] = data[4];
-		data[4] = data[3];
-		data[3] = data[2];
-		data[2] = data[1];
-		data[1] = temp;
-		
-		for (int i = 0; i < data.length; i++) {
-			System.out.println(data[i]);
-		}
-		
-		// 2번 문제
-		
 		Scanner sc = new Scanner(System.in);
-
-		System.out.print("회전 카운트 입력 = ");
-		int count = sc.nextInt();
-		
-		for (int i = 0; i < count; i++) {
-			temp = data[0];
-			data[0] = data[4];
-			data[4] = data[3];
-			data[3] = data[2];
-			data[2] = data[1];
-			data[1] = temp;
-		}
+		System.out.println("원하는 회전 크기 입력");
+		int size = sc.nextInt();
+		sc.close();
+	
+			for(int k = 0 ; k < size ; k++) {
+					int temp = data[data.length-1];
+					for(int i=data.length-1; i > 0; i--) {
+								data[i] = data[i-1];
+							}
+						data[0] = temp;
+					}	
+	
 		for (int i = 0; i < data.length; i++) {
-			System.out.println(data[i]);
+			System.out.print(data[i]);
+			if(i < data.length-1) {
+				System.out.print(" , ");
+			}
 		}
+		System.out.println();
 	}
 }

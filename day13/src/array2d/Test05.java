@@ -1,6 +1,6 @@
 package array2d;
 
-public class Test04 {
+public class Test05 {
 	public static void main(String[] args) {
 		
 		int[][] data = new int[5][5]; // 배열 생성
@@ -8,9 +8,8 @@ public class Test04 {
 		//초기화
 		int count = 1;
 		for(int i = 0 ; i < data.length ; i++) {
-		for(int k = 0 ; k < data[i].length ; k++) {
-			data[i][k] =  count;
-			count++;
+			for(int k = 0 ; k < data[i].length ; k++) {
+			data[k][i] =  count++;
 			}
 		}
 	

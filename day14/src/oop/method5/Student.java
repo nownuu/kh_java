@@ -51,8 +51,14 @@ public class Student {
 	float getAverage() {
 		return this.getTotal()/3.0f;
 	}
-	boolean getRank() {
-		return this.getAverage()>0 && this.getAverage()<=100;
+	boolean getRanka() {
+		return this.getAverage()>90 && this.getAverage()<=100;
+	}
+	boolean getRankb() {
+		return this.getAverage()>80 && this.getAverage()<=90;
+	}
+	boolean getRankc() {
+		return this.getAverage()>70 && this.getAverage()<=80;
 	}
 	//
 	void showInfo() {
@@ -65,13 +71,13 @@ public class Student {
 		System.out.println("총점 = "+this.getTotal());
 		System.out.println("평균 = "+this.getAverage());
 		
-		if(this.getAverage()>90 && this.getAverage()<=100) {
+		if(this.getRanka()) {
 			System.out.println("A등급");
 		}
-		else if(this.getAverage()>80 && this.getAverage()<=90) {
+		else if(this.getRankb()) {
 			System.out.println("B등급");
 		}
-		else if(this.getAverage()>70 && this.getAverage()<=80) {
+		else if(this.getRankc()) {
 			System.out.println("C등급");
 		}
 		else {

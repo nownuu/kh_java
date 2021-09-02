@@ -1,13 +1,15 @@
 package oop.inherit5;
 
-public class MP3 extends File{
-	public void duration() {
-		System.out.println("재생시간이 초단위  실행.");
+public class MP3 extends File2{
+
+	private int duration;
+
+	public int getDuration() {
+		return duration;
 	}
-	public void forward() {
-		System.out.println("빨리감기  실행.");
+
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
-	public void rewind() {
-		System.out.println("되감기  실행.");
-	}
+	
 }

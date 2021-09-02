@@ -1,7 +1,9 @@
 package oop.inherit5;
 
 public class File {
+	// 공통변수 생성
 	private String name;
+	private float fileSize;
 
 	public String getName() {
 		return name;
@@ -10,9 +12,13 @@ public class File {
 		this.name = name;
 	}
 	
-	public void fileSize() {
-		System.out.println("파일 크기 실행.");
+	public float getFileSize() {
+		return fileSize;
 	}
+	public void setFileSize(float fileSize) {
+		this.fileSize = fileSize;
+	}
+	// 공통 메소드 생성
 	public void execute() {
 		System.out.println("실행 기능 실행.");
 	}

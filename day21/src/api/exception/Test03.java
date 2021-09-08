@@ -3,7 +3,7 @@ package api.exception;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Test02 {
+public class Test03 {
 	public static void main(String[] args) {
 		// Q 프로그램에서 예외가 발생하는 상황과 예외의 이름을 조사해보세요.
 		

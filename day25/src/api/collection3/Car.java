@@ -1,7 +1,5 @@
 package api.collection3;
 
-import java.util.Objects;
-
 public class Car {
 	private String name;
 	private int people;
@@ -53,5 +51,4 @@ public class Car {
 	public String toString() {
 		return "Car [name=" + name + ", people=" + people + ", price=" + price + ", rent=" + rent + "]";
 	}
-	
 }

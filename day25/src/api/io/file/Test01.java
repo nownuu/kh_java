@@ -17,7 +17,7 @@ public class Test01 {
 		
 		File a = new File("sample", "test.txt"); // sample 폴더의 test.txt 관리 객체 생성
 		File b = new File("sample/test.txt");//sample/test.txt 관리 객체 생성
-		File c = new File("sample\\test.txt"); // sample\test.txt 관리 객체 생성
+		File c = new File("sample\"\test.txt"); // sample\test.txt 관리 객체 생성
 		
 		System.out.println(a.exists());
 		System.out.println(b.exists());

@@ -17,8 +17,8 @@ public class Test02 {
 		// 도구 생성
 		
 		File target = new File("sample", "multi.txt");
-		FileInputStream out = new FileInputStream(target);
-		BufferedInputStream buffer = new BufferedInputStream(out); //8192byte
+		FileInputStream in = new FileInputStream(target);
+		BufferedInputStream buffer = new BufferedInputStream(in); //8192byte
 		DataInputStream data = new DataInputStream(buffer);
 		
 		// [프로그램] <- data <- buffer <- in <- target <-[multi.txt]

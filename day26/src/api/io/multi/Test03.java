@@ -26,15 +26,15 @@ public class Test03 {
 		System.out.println(partlist);
 		
 		// 멀티 바이트 출력
-		
+
 		File target = new File("sample", "lotto.txt");
 		FileOutputStream out = new FileOutputStream(target);
 		BufferedOutputStream buffer = new BufferedOutputStream(out);
 		DataOutputStream data = new DataOutputStream(buffer);
-		
+	
 		for(int n : partlist) {
 			data.writeInt(n);
-		}
+			}
 		data.close();
 	}
 }

@@ -14,6 +14,7 @@ public class Server {
 		
 		ServerSocket server = new ServerSocket(30000);
 		System.out.println("프로그램 실행");
+		
 		Socket socket = server.accept();
 		OutputStream in = socket.getOutputStream();
 		

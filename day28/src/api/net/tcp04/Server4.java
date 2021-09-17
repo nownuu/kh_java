@@ -24,7 +24,7 @@ public class Server4 {
 		}
 		
 		// 사용자에게 로또번호 6개를 보내는 코드
-		// int 6개를 보낼 수 있도록 멀티바이트 스트림을 구성
+		// int 6개를 보낼 수 있도록 멀티바이트      스트림을 구성
 		OutputStream out = socket.getOutputStream();
 		// 이것만 쓰는 경우는 바이트만 쓰는 경우
 		
@@ -33,6 +33,7 @@ public class Server4 {
 		
 		oData.writeObject(lotto);
 		
+		oData.flush();
 		socket.close();
 		server.close();
 	}

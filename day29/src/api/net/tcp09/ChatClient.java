@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 public class ChatClient {
 	public static void main(String[] args) throws UnknownHostException, IOException {
-		Socket socket = new Socket("localhost", 30000);
+		Socket socket = new Socket("1.220.236.75", 30000);
 		
 		//(수신) 서버에서 보내는 메세지를 수신 후 출력 - thread
 		//(발신) 사용자가 입력한 메세지를 서버로 전송 - main
@@ -36,7 +36,7 @@ public class ChatClient {
 					if(line == null || line.equals("/exit")) {//종료명령이 전송되었다면 수신 중지
 						break;
 					}
-					System.out.println("수신 : "+line);
+					System.out.println("Send : "+line);
 				}
 			}
 			catch(Exception e) {
@@ -57,7 +57,7 @@ public class ChatClient {
 		PrintWriter printer = new PrintWriter(buffer);
 		
 		while(true) {
-			String input = JOptionPane.showInputDialog("메세지 입력");
+			String input = JOptionPane.showInputDialog("메시지 입력");
 			if(input != null) {//입력값이 있다면 전송하도록 조건을 설정
 				printer.println(input);
 				printer.flush();

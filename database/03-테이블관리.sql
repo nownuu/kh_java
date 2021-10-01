@@ -125,27 +125,30 @@ drop sequence monster_seq;
  	음원 고유 번호는 sequence를 사용하여 부여(chart_seq)
  	*/
 
- CREATE TABLE CHART(
+CREATE TABLE CHART(
 music_no number(2),
 music_rank number(2),
-music_name varchar2(42),
-singer_name varchar2(21),
-album_name varchar2(42),
-like_count number(4)
+music_name varchar2(65),
+singer_name varchar2(65),
+album_name varchar2(65),
+like_count number(6)
 );
 
 
  
  create sequence chart_seq;
  
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 1, 'Congratulation','DAY6','1th mini',6666);
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 2, 'Queendom','Red Velvet','6th mini',5555);
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 3, 'Blue Flame','Astro','6th mini',5436);
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 4, 'Sunset','엔플라잉','6th mini',4567);
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 5, 'LO$ER=LO♡ER','Tomorrow X Togetter','fight',4321);
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 6, 'Windy Day','오마이걸','WindyDay',3789);
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 7, 'ASAP','STACY','STAYDOM',2899);
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 8, 'Bad guy','Billie Eilish','WHEN WE',2222);
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 9, 'Another Love','Tom Odell','another love',2000);
- insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 10, '파도가 끝나는 곳까지','DAY6','The book of Us',1000);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 1, 'STAY', 'The kid LAROI, Justin Bieber', 'Stay', 149479);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 2, '신호등', '이무진', '신호등', 213673);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 3, 'Permission to Dance', '방탕소년단', 'Butter / Permission to Dance', 175116);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 4, 'OHAYO MY NIGHT', '디핵(D-Hack), Pateko(파테코)', 'OHAYO MY NIGHT', 131563);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 5, 'Next Level', 'aespa', 'Next Level', 205744);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 6, 'Butter', '방탄소년단', 'Butter', 243669);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 7, '바라만 본다', 'MSH워너비(M.O.M)', 'MSG워너비 1집', 156234);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 8, 'Weekend', '태연(TAEYEON)', 'Weekend', 137153);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 9, '낙하(with 아이유)', 'AKMU(악뮤)', 'NEXT EPISODE', 123670);
+ insert into chart (music_no, music_rank, music_name, singer_name, album_name, like_count)values(chart_seq.nextval, 10,'Queendom', 'Red Velvet(레드벨벳)', 'Queendom - The 6th Mini Album', 91229);
  
+ commit;
+
+ select * from chart;

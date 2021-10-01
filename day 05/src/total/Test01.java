@@ -4,7 +4,7 @@ import java.lang.*;
 
 public class Test01 {
 	public static void main(String[] args) {
-		
+
 		int inH = 12, inM = 34;
 		int outH = 15, outM = 21;
 		

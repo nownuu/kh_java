@@ -6,7 +6,6 @@ public class RW_1 {
 	public static void main(String[] args) {
 		// 로또 6개 추첨기
 		
-		
 		Random r = new Random();
 		int[] count = new int[45];
 		

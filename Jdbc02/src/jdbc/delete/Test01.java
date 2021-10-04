@@ -1,3 +1,4 @@
+
 package jdbc.delete;
 
 import java.sql.Connection;
@@ -27,7 +28,15 @@ public class Test01 {
 		sc.close();
 		 
 		ps.setInt(1,del_no);
-		 
+		
+		int result = ps.executeUpdate();
+		if(result == 0) {
+			System.out.println("없는 번호입니다.");
+		}
+		else {
+			System.out.println("삭제 성공");
+		}
+		
 		ps.execute();
 		con.close();
 		System.out.println("Finish");

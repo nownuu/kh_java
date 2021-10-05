@@ -6,8 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Test04 {
+public class Test05 {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		// 조건을 통한 필터링
+		// = 목록과 출력 방식이 동일하다.
+		
+		// 입력
+		String menuType = "식사";
+		
+		// 처리
 		Class.forName("oracle.jdbc.OracleDriver");
 		System.out.println("OracleDriver connect");
 		
@@ -19,21 +26,18 @@ public class Test04 {
 		System.out.println("Login");
 		System.out.println("===================");
 		
-		String sql = "select * from member";
-		System.out.println("회원 내역을 조회합니다.");
+		String sql = "select * from menu where menu_type = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, menuType);		
 		ResultSet rs = ps.executeQuery();
 		
 		while(rs.next()) {
-			System.out.println("\n"+ rs.getString("member_nick"));
-			System.out.println(rs.getDate("member_birth"));
-			System.out.println(rs.getString("member_email"));
-			System.out.println(rs.getString("member_phone"));
-			System.out.println(rs.getInt("member_point"));
-			System.out.println(rs.getString("member_grade"));
+			System.out.print(rs.getString("menu_name"));
+			System.out.print(" / ");
+			System.out.print(rs.getInt("menu_price"));
+			System.out.print(" / ");
+			System.out.print(rs.getString("menu_type"));
 		}
-		
 		con.close();
-		System.out.println("조회 완료");
 	}
 }

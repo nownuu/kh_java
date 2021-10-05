@@ -20,18 +20,24 @@ public class Test02 {
 		System.out.println("Login");
 		System.out.println("===================");
 		
-		String sql = "select * from exam";
-		System.out.println("시험 내역을 조회합니다.");
+		String sql = "select "
+					+ "exam_id \"번호\", "
+					+ "student \"학생명\", "
+					+ "subject \"과목\", "
+					+ "type \"유형\", "
+					+ "score \"점수\" "
+					+ "from exam";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		
+
 		while(rs.next()) {
-			System.out.println(rs.getString("exam_id"));
-			System.out.println(rs.getString("student"));
-			System.out.println(rs.getString("subject"));
-			System.out.println(rs.getString("type"));
-			System.out.println(rs.getInt("score"));
-		}
+			System.out.println("\n"+rs.getInt(1));		//rs.getInt("번호")
+			System.out.println(rs.getString(2));	//rs.getString("학생명")
+			System.out.println(rs.getString(3));	//rs.getString("과목")
+			System.out.println(rs.getString(4));	//rs.getString("유형")
+			System.out.println(rs.getInt(5));		//rs.getInt("점수")
+			}
+
 		con.close();
 		System.out.println("조회 완료");
 	}

@@ -39,18 +39,8 @@ public class Test01 {
 			System.out.println("삭제 성공");
 		}
 		
-		ps.execute();
+//		ps.execute();
 		con.close();
 		System.out.println("Finish");
-		
-		ResultSet rs = null;
-		Statement st = null;
-		
-		rs = st.executeQuery("select*from product");
-		if(rs.next()) {
-			String name = rs.getString("name");
-		} else {
-			
-		}
 	}
 }

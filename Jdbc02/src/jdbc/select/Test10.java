@@ -7,17 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Test08 {
+public class Test10 {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		// 조건을 통한 필터링
-		// = 목록과 출력 방식이 동일하다.
-		
 		// 입력
-		Scanner sc = new Scanner (System.in);
-		System.out.println("검색어를 입력하십시오");
-		String search = sc.next();
+		Scanner sc = new Scanner(System.in);
+        System.out.println("컬럼명 입력 : ");
+        String kind = sc.nextLine();
+        System.out.println("검색 키워드 입력 : ");
+        String keyword = sc.nextLine();
+        sc.close();
 		
-		// 처리
+		//처리
 		Class.forName("oracle.jdbc.OracleDriver");
 		System.out.println("OracleDriver connect");
 		
@@ -29,24 +29,23 @@ public class Test08 {
 		System.out.println("Login");
 		System.out.println("===================");
 		
-		// 유사한 이름을 가지는 아이디나 닉네임조회
-//		String sql = "select * from member  where member_id like '%'||?||'%' member_nick like '%'||?||'%'";
-		String sql = "select * from member  where instr(member_id, ?) > 0 or instr(member_nick, ?) > 0 ";
+		//
+		String sql = "select * from member where instr(#1, ?) > 0 order by #1 asc";
+		sql = sql.replace("#1", kind);
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, "%"+search+"%");
-		ps.setString(2,  "%"+search+"%" );
-//		ps.execute();
+		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
 		
-		if(rs.next()) {
+		while(rs.next()) {
 			System.out.print(rs.getString("member_id"));
 			System.out.print(" / ");
 			System.out.print(rs.getString("member_nick"));
 			System.out.print(" / ");
-			System.out.print(rs.getInt("member_point"));
-		}
-		else {
-			System.out.println("인지하지 못했습니다.");
+			System.out.print(rs.getString("member_email"));
+			System.out.print(" / ");
+			System.out.print(rs.getString("member_phone"));
+			System.out.print(" / ");
+			System.out.println(rs.getString("member_grade"));
 		}
 		con.close();
 	}

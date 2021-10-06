@@ -5,15 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
-public class Test01 {
+public class Test02 {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		// Q : 번호를 이용한 상품정보 조회(product) 조회 (단일 조회)
-		// ex : 3번 상품의 정보를 출력
-		// 단일 조회
-		
 		// 입력
-		int no = 3;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("== input User ID ==");
+		String id = sc.next();
 		
 		// 처리
 		Class.forName("oracle.jdbc.OracleDriver");
@@ -27,21 +26,26 @@ public class Test01 {
 		System.out.println("Login");
 		System.out.println("===================");
 		
-		String sql = "select * from product where no = ?";
+		String sql = "select * from exam  where exam_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, no);
+		ps.setString(1, id);
 		ResultSet rs = ps.executeQuery();
 		
 		if(rs.next()) {
-			System.out.print(rs.getInt("no"));
-			System.out.println(" / ");
-			System.out.print(rs.getString("name"));
-			System.out.println(" / ");
-			System.out.print(rs.getInt("price"));
+			System.out.print(rs.getString("exam_id"));
+			System.out.print(" / ");
+			System.out.print(rs.getString("student"));
+			System.out.print(" / ");
+			System.out.print(rs.getString("subject"));
+			System.out.print(" / ");
+			System.out.print(rs.getString("type"));
+			System.out.print(" / ");
+			System.out.print(rs.getInt("score"));
 		}
-		else { //없을 경우
-			System.out.println("찾으시는 상품이 없습니다.");
+		else {
+			System.out.println("! NOT FIND");
 		}
+		
 		con.close();
 	}
 }

@@ -41,4 +41,25 @@ public class ProductDao {
 		
 		con.close();
 	}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+		public void insert2(ProductDto2 productDto) throws Exception {
+			Connection con = JdbcUtils.connect("kh", "kh");
+					
+					String sql = "insert into product("
+												+ "no, name, type, price, made, expire"
+											+ ") "
+											+ "values("
+												+ "product_seq.nextval, ?, ?, ?, ?, ?"
+											+ ")";
+					PreparedStatement ps = con.prepareStatement(sql);
+					ps.setString(1, productDto.getName());
+					ps.setString(2, productDto.getType());
+					ps.setInt(3, productDto.getPrice());
+					ps.setDate(4, productDto.getMade());
+					ps.setDate(5, productDto.getExpire());
+					ps.execute();
+					
+					con.close();
+	}
 }

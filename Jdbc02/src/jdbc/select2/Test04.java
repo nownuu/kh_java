@@ -9,7 +9,7 @@ import java.util.Scanner;
 import jdbc.util.JdbcUtils;
 
 public class Test04 {
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	public static void main(String[] args) throws Exception {
 		//입력
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Input Your ID");

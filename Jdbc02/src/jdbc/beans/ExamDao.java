@@ -26,5 +26,19 @@ public class ExamDao {
 		
 		con.close();		
 	}
-	
+	// [1] 등록 메소드 만들기
+	// 낱개 데이터가 아닌 의미 있는 단위로 데이터를 전달받도록 구현
+	public void insert(ExamDto examDto) throws Exception{
+		Connection con = JdbcUtils.connect("kh", "kh");
+		
+		String sql = "insert into exam values(exam_seq.nextval, ?, ?, ?, ?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, examDto.getStudent());
+		ps.setString(2, examDto.getSubject());
+		ps.setString(3, examDto.getType());
+		ps.setInt(4, examDto.getScore());
+		ps.execute();
+		
+		con.close();		
+	}
 }

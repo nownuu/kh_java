@@ -10,6 +10,7 @@ public class JdbcUtils {
 		Class.forName("oracle.jdbc.OracleDriver");
 		Connection con = DriverManager.getConnection(
 							"jdbc:oracle:thin:@localhost:1521:xe", user, password);
+		
 		System.out.println("! Oracle Login");
 		System.out.println("============");
 		return con;

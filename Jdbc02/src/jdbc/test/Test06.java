@@ -1,4 +1,4 @@
-package jdbc.update;
+package jdbc.test;
 
 import java.util.Scanner;
 

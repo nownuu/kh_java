@@ -1,4 +1,4 @@
-package jdbc.delete;
+package jdbc.test;
 
 import jdbc.beans.ExamDao;
 import jdbc.beans.ExamDto;

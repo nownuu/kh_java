@@ -2,6 +2,9 @@ package jdbc.beans;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import jdbc.util.JdbcUtils;
 
@@ -96,6 +99,45 @@ public class ProductDao {
 				int result = ps.executeUpdate();
 				
 				return result > 0;
+			}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+			public boolean delete(int productNo) throws Exception {
+				Connection con = JdbcUtils.connect(USER, PASSWORD);
+				
+				String sql = "delete product where no = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, productNo);
+				int result = ps.executeUpdate();
+				
+				con.close();
+				return result > 0;
+			}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+			public List<ProductDto> select() throws Exception{
+				Connection con = JdbcUtils.connect(USER, PASSWORD);
+				
+				String sql = "select * from Product";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+				
+				List<ProductDto> list = new ArrayList<>();
+				
+				while(rs.next()) {
+					ProductDto productDto = new ProductDto();
+					productDto.setNo(rs.getInt("no"));
+					productDto.setName(rs.getString("Name"));
+					productDto.setType(rs.getString("type"));
+					productDto.setPrice(rs.getInt("price"));
+					productDto.setMade(rs.getString("made"));
+					productDto.setExpire(rs.getString("expire"));
+					
+					list.add(productDto);
+				}
+				con.close();
+				
+				return list;
 			}
 }
 

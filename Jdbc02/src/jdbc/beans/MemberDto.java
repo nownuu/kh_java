@@ -1,79 +1,74 @@
+
 package jdbc.beans;
 
 import java.sql.Date;
 
+//회원 1명의 정보를 모두 담을 수 있는 포장(변환) 클래스
 public class MemberDto {
-	private String id;
-	private String password;
-	private String nick;
-	private Date birth;
-	private String email;
-	private String phone;
-	private Date join;
-	private int point;
-	private String grade;
-	public Date getJoin() {
-		return join;
-	}
-	public void setJoin(Date join) {
-		this.join = join;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getNick() {
-		return nick;
-	}
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-	public Date getBirth() {
-		return birth;
-	}
-	public void setBirth(Date birth) {
-		this.birth = birth;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public int getPoint() {
-		return point;
-	}
-	public void setPoint(int point) {
-		this.point = point;
-	}
-	public String getGrade() {
-		return grade;
-	}
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
+	private String memberId;
+	private String memberPw;
+	private String memberNick;
+	private String memberBirth;
+	private String memberEmail;
+	private String memberPhone;
+	private Date memberJoin;
+	private int memberPoint;
+	private String memberGrade;
 	public MemberDto() {
 		super();
 	}
-	@SuppressWarnings("deprecation")
-	public void setBirth(String birth) {
-		int birthYear = Integer.parseInt(birth.substring(0, 4));
-		int birthMonth = Integer.parseInt(birth.substring(5, 7));
-		int birthDate = Integer.parseInt(birth.substring(8));
-		this.birth = new Date(birthYear-1900, birthMonth-1, birthDate);
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public String getMemberPw() {
+		return memberPw;
+	}
+	public void setMemberPw(String memberPw) {
+		this.memberPw = memberPw;
+	}
+	public String getMemberNick() {
+		return memberNick;
+	}
+	public void setMemberNick(String memberNick) {
+		this.memberNick = memberNick;
+	}
+	public String getMemberBirth() {
+		return memberBirth;
+	}
+	public void setMemberBirth(String memberBirth) {
+		this.memberBirth = memberBirth;
+	}
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
+	public String getMemberPhone() {
+		return memberPhone;
+	}
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
+	}
+	public Date getMemberJoin() {
+		return memberJoin;
+	}
+	public void setMemberJoin(Date memberJoin) {
+		this.memberJoin = memberJoin;
+	}
+	public int getMemberPoint() {
+		return memberPoint;
+	}
+	public void setMemberPoint(int memberPoint) {
+		this.memberPoint = memberPoint;
+	}
+	public String getMemberGrade() {
+		return memberGrade;
+	}
+	public void setMemberGrade(String memberGrade) {
+		this.memberGrade = memberGrade;
 	}
 }

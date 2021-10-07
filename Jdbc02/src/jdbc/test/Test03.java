@@ -12,17 +12,17 @@ public class Test03 {
 		MemberDto memberDto = new MemberDto();
 		
 		System.out.print("Input your ID : ");
-		memberDto.setId(sc.nextLine());
+		memberDto.setMemberId(sc.nextLine());
 		System.out.print("Input your PASSWORD : ");
-		memberDto.setPassword(sc.nextLine());
+		memberDto.setMemberPw(sc.nextLine());
 		System.out.print("Input your NICKNAME : ");
-		memberDto.setNick(sc.nextLine());
+		memberDto.setMemberNick(sc.nextLine());
 		System.out.print("Input your BIRTH : ");
-		memberDto.setBirth(sc.nextLine());
+		memberDto.setMemberBirth(sc.nextLine());
 		System.out.print("Input your E-MAIL : ");
-		memberDto.setEmail(sc.nextLine());
+		memberDto.setMemberEmail(sc.nextLine());
 		System.out.print("Input your PHONE NUMBER : ");
-		memberDto.setPhone(sc.nextLine());
+		memberDto.setMemberPhone(sc.nextLine());
 		
 		// 모듈 생성
 		MemberDao memberDao = new MemberDao();

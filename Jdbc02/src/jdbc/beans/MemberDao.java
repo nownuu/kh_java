@@ -2,6 +2,9 @@ package jdbc.beans;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import jdbc.util.JdbcUtils;
 
@@ -18,12 +21,12 @@ public class MemberDao {
 				+ "values(?, ?, ?, to_date(?, 'YYYY-MM-DD'), ?, ?)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, memberDto.getId());
-		ps.setString(2, memberDto.getPassword());
-		ps.setString(3, memberDto.getNick());
-		ps.setDate(4, memberDto.getBirth());
-		ps.setString(5, memberDto.getEmail());
-		ps.setString(6, memberDto.getPhone());
+		ps.setString(1, memberDto.getMemberId());
+		ps.setString(2, memberDto.getMemberPw());
+		ps.setString(3, memberDto.getMemberNick());
+		ps.setString(4, memberDto.getMemberBirth());
+		ps.setString(5, memberDto.getMemberEmail());
+		ps.setString(6, memberDto.getMemberPhone());
 		ps.execute();
 		
 		con.close();
@@ -38,12 +41,12 @@ public class MemberDao {
 					+ "member_email = ?, member_phone = ?"
 					+ "where member_id = ? and member_pw = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, memberDto.getNick());
-			ps.setDate(2, memberDto.getBirth());
-			ps.setString(3, memberDto.getEmail());
-			ps.setString(4, memberDto.getPhone());
-			ps.setString(5, memberDto.getId());
-			ps.setString(6, memberDto.getPassword());
+			ps.setString(1, memberDto.getMemberNick());
+			ps.setString(2, memberDto.getMemberBirth());
+			ps.setString(3, memberDto.getMemberEmail());
+			ps.setString(4, memberDto.getMemberPhone());
+			ps.setString(5, memberDto.getMemberId());
+			ps.setString(6, memberDto.getMemberPw());
 			int result = ps.executeUpdate();
 			
 			return result > 0;
@@ -57,11 +60,55 @@ public class MemberDao {
 			+ "where member_id = ? and member_pw = ? ";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, changePW);
-			ps.setString(2, memberDto.getId());
-			ps.setString(3, memberDto.getPassword());
+			ps.setString(2, memberDto.getMemberId());
+			ps.setString(3, memberDto.getMemberPw());
 			
 			int result = ps.executeUpdate();
 
 			return result > 0;
 			}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+		public boolean delete(String memberId) throws Exception {
+			Connection con = JdbcUtils.connect(USER, PASSWORD);
+			
+			String sql = "delete member where member_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, memberId);
+			int result = ps.executeUpdate();
+			
+			con.close();
+			
+			return result > 0;
+		}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+		public List<MemberDto> select() throws Exception{
+			Connection con = JdbcUtils.connect(USER, PASSWORD);
+			
+			String sql = "select * from member";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			List<MemberDto> list = new ArrayList<>();
+			
+			while(rs.next()) {
+				MemberDto memberDto = new MemberDto();
+				memberDto.setMemberId(rs.getString("member_id"));
+				memberDto.setMemberPw(rs.getString("member_pw"));
+				memberDto.setMemberNick(rs.getString("member_nick"));			
+				memberDto.setMemberBirth(rs.getString("member_birth"));
+				memberDto.setMemberEmail(rs.getString("member_email"));
+				memberDto.setMemberPhone(rs.getString("member_phone"));
+				memberDto.setMemberJoin(rs.getDate("member_join"));
+				memberDto.setMemberPoint(rs.getInt("member_point"));
+				memberDto.setMemberGrade(rs.getString("member_grade"));
+				
+				list.add(memberDto);
+			}
+			
+			con.close();
+			
+			return list;
+		}
 }

@@ -10,10 +10,10 @@ public class Test08 {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("수정하려는 회원의 정보를 입력하십시오");
 		MemberDto memberDto = new MemberDto();
-		memberDto.setId("ID = "+sc.nextLine());
-		memberDto.setPassword("PassWord = "+sc.nextLine());
-		memberDto.setEmail("E-mail = " + sc.nextLine());
-		memberDto.setPhone("Phone Number"+sc.nextLine());
+		memberDto.setMemberId("ID = "+sc.nextLine());
+		memberDto.setMemberPw("PassWord = "+sc.nextLine());
+		memberDto.setMemberEmail("E-mail = " + sc.nextLine());
+		memberDto.setMemberPhone("Phone Number"+sc.nextLine());
 		//
 		System.out.println("변경하려는 비밀번호를 입력하십시오");
 		String changePW = sc.nextLine();

@@ -111,4 +111,37 @@ public class MemberDao {
 			
 			return list;
 		}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+		public List<MemberDto> select(String column, String keyword) throws Exception{
+			Connection con = JdbcUtils.connect(USER, PASSWORD);
+			
+			String sql = "select * from member where instr(#1, ?) > 0 "
+									+ "order by #1 asc";
+			sql.replace("#1", column);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ResultSet rs = ps.executeQuery();
+			
+			List<MemberDto> list = new ArrayList<>();
+			
+			while(rs.next()) {
+				MemberDto memberDto = new MemberDto();
+				memberDto.setMemberId(rs.getString("member_id"));
+				memberDto.setMemberPw(rs.getString("member_pw"));
+				memberDto.setMemberNick(rs.getString("member_nick"));			
+				memberDto.setMemberBirth(rs.getString("member_birth"));
+				memberDto.setMemberEmail(rs.getString("member_email"));
+				memberDto.setMemberPhone(rs.getString("member_phone"));
+				memberDto.setMemberJoin(rs.getDate("member_join"));
+				memberDto.setMemberPoint(rs.getInt("member_point"));
+				memberDto.setMemberGrade(rs.getString("member_grade"));
+				
+				list.add(memberDto);
+			}
+			
+			con.close();
+			
+			return list;
+		}
 }

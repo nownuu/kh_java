@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class ProductDto2 {
 
+	private int no;
 	private String name;
 	private String type;
 	private int price;
@@ -11,6 +12,12 @@ public class ProductDto2 {
 	private Date expire;
 	public ProductDto2() {
 		super();
+	}
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
 	}
 	public String getName() {
 		return name;

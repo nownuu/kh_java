@@ -1,7 +1,9 @@
 package jdbc.beans;
 
+
 public class ProductDto {
 
+	private int no;
 	private String name;
 	private String type;
 	private int price;
@@ -9,6 +11,12 @@ public class ProductDto {
 	private String expire;
 	public ProductDto() {
 		super();
+	}
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
 	}
 	public String getName() {
 		return name;

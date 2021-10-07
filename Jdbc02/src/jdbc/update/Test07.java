@@ -1,4 +1,4 @@
-package jdbc.delete;
+package jdbc.update;
 
 import java.util.Scanner;
 

@@ -144,4 +144,72 @@ public class MemberDao {
 			
 			return list;
 		}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+//		목록 조회 기능
+		public List<MemberDto> list() throws Exception {
+			
+			Connection con = JdbcUtils.connect(USER, PASSWORD);
+			
+			String sql = "select * from member";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			//rs의 내용을 List에 복사
+			List<MemberDto> memberList = new ArrayList<>();
+			while(rs.next()) {
+				MemberDto memberDto = new MemberDto();
+				
+				//(9개 항목 복사)
+				memberDto.setMemberId(rs.getString("member_id"));
+				memberDto.setMemberPw(rs.getString("member_pw"));
+				memberDto.setMemberNick(rs.getString("member_nick"));
+				memberDto.setMemberBirth(rs.getString("member_birth"));
+				memberDto.setMemberEmail(rs.getString("member_email"));
+				memberDto.setMemberPhone(rs.getString("member_phone"));
+				memberDto.setMemberJoin(rs.getDate("member_join"));
+				memberDto.setMemberPoint(rs.getInt("member_point"));
+				memberDto.setMemberGrade(rs.getString("member_grade"));
+				
+				memberList.add(memberDto);
+			}
+			
+			con.close();
+			
+			return memberList;
+		}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+//		회원검색 기능
+		public List<MemberDto> search(String column, String keyword) throws Exception {
+			Connection con = JdbcUtils.connect(USER, PASSWORD);
+			
+			String sql = "select * from member where instr(#1, ?) > 0 order by #1 asc";
+			sql = sql.replace("#1", column);//정적 치환
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);//동적 치환
+			ResultSet rs = ps.executeQuery();
+			
+			//copy
+			List<MemberDto> list = new ArrayList<>();
+			while(rs.next()) {
+				MemberDto memberDto = new MemberDto();
+				
+				memberDto.setMemberId(rs.getString("member_id"));
+				memberDto.setMemberPw(rs.getString("member_pw"));
+				memberDto.setMemberNick(rs.getString("member_nick"));
+				memberDto.setMemberBirth(rs.getString("member_birth"));
+				memberDto.setMemberEmail(rs.getString("member_email"));
+				memberDto.setMemberPhone(rs.getString("member_phone"));
+				memberDto.setMemberJoin(rs.getDate("member_join"));
+				memberDto.setMemberPoint(rs.getInt("member_point"));
+				memberDto.setMemberGrade(rs.getString("member_grade"));
+				
+				list.add(memberDto);
+			}
+			
+			con.close();
+			
+			return list;
+		}
 }

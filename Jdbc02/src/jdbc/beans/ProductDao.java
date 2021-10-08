@@ -146,6 +146,8 @@ public class ProductDao {
 				
 				String sql = "select * from product where instr(#1, ?) > 0 "
 										+ "order by #1 asc";
+//			  	String sql = "select * from product where #1 like '%'||?||'%' order by #1 asc";
+				
 				sql = sql.replace("#1", column);
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setString(1, keyword);

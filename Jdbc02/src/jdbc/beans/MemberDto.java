@@ -71,4 +71,10 @@ public class MemberDto {
 	public void setMemberGrade(String memberGrade) {
 		this.memberGrade = memberGrade;
 	}
+	@Override
+	public String toString() {
+		return "MemberDto [memberId=" + memberId + ", memberNick=" + memberNick + ", memberBirth=" + memberBirth
+				+ ", memberEmail=" + memberEmail + ", memberPhone=" + memberPhone + ", memberJoin=" + memberJoin
+				+ ", memberPoint=" + memberPoint + ", memberGrade=" + memberGrade + "]";
+	}
 }

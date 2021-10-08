@@ -3,6 +3,7 @@ package jdbc.beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,5 +212,69 @@ public class MemberDao {
 			con.close();
 			
 			return list;
+		}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+		public MemberDto select(String Member_id) throws Exception {
+			Connection con = JdbcUtils.connect(USER, PASSWORD);
+			
+			String sql = "select * from member where member_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, Member_id);
+			ResultSet rs = ps.executeQuery();
+			
+			MemberDto memberDto;
+			if(rs.next()) {
+				memberDto = new MemberDto();
+				
+				memberDto.setMemberId(rs.getString("member_id"));
+				memberDto.setMemberNick(rs.getString("member_nick"));
+				memberDto.setMemberBirth(rs.getString("member_birth"));
+				memberDto.setMemberEmail(rs.getString("member_email"));
+				memberDto.setMemberPhone(rs.getString("member_phone"));
+				memberDto.setMemberJoin(rs.getDate("member_join"));
+				memberDto.setMemberPoint(rs.getInt("member_point"));
+				memberDto.setMemberGrade(rs.getString("member_grade"));
+			}
+			else {
+				memberDto = null;
+			}
+			con.close();
+			return memberDto;
+		}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+//		회원상세 기능
+		public MemberDto get(String memberId) throws Exception {
+			Connection con = JdbcUtils.connect(USER, PASSWORD);
+			
+			String sql = "select * from member where member_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, memberId);
+			ResultSet rs = ps.executeQuery();
+			
+			MemberDto memberDto;
+			
+			if(rs.next()) {
+				memberDto = new MemberDto();
+				
+				//copy
+				memberDto.setMemberId(rs.getString("member_id"));
+				memberDto.setMemberPw(rs.getString("member_pw"));
+				memberDto.setMemberNick(rs.getString("member_nick"));
+				memberDto.setMemberBirth(rs.getString("member_birth"));
+				memberDto.setMemberEmail(rs.getString("member_email"));
+				memberDto.setMemberPhone(rs.getString("member_phone"));
+				memberDto.setMemberJoin(rs.getDate("member_join"));
+				memberDto.setMemberPoint(rs.getInt("member_point"));
+				memberDto.setMemberGrade(rs.getString("member_grade"));
+			}
+			else {
+				memberDto = null;
+			}
+			
+			con.close();
+			
+			return memberDto;
 		}
 }

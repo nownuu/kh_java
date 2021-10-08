@@ -201,6 +201,36 @@ public class ExamDao {
 			
 			return list;
 		}
-//		[6] 단일조회(R) 메소드
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+//		단일조회(R) 메소드
 //		= 결과가 1개 또는 0개로 나오는 메소드
+//		= 매개변수 : 시험지번호(exam_id, int)
+//		= 반환형 : 시험지번호(ExamDto)
+		
+		public ExamDto  select(int examID) throws Exception {
+			Connection con = JdbcUtils.connect(USER, PASSWORD);
+			
+			String sql = "select * from exam where exam_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, examID);
+			ResultSet rs = ps.executeQuery();
+			
+			// copy
+			ExamDto examDto;
+			if(rs.next()) { // 있으면
+				examDto = new ExamDto();
+				
+				examDto.setExamId(rs.getInt("exam_id"));
+				examDto.setStudent(rs.getString("student"));
+				examDto.setSubject(rs.getString("subject"));
+				examDto.setType(rs.getString("type"));
+				examDto.setScore(rs.getInt("score"));
+			}
+			else {
+				examDto = null;
+			}
+			con.close();
+			return examDto;
+		}
 }

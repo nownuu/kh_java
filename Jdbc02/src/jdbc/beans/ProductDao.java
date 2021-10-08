@@ -170,5 +170,31 @@ public class ProductDao {
 				
 				return list;
 			}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+			public ProductDto select(int no) throws Exception {
+				Connection con = JdbcUtils.connect(USER, PASSWORD);
+				
+				String sql = "select * from product where no = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, no);
+				ResultSet rs = ps.executeQuery();
+				
+				ProductDto productDto;
+				if(rs.next()) {
+					productDto = new ProductDto();
+					productDto.setNo(rs.getInt("no"));
+					productDto.setName(rs.getString("Name"));
+					productDto.setType(rs.getString("type"));
+					productDto.setPrice(rs.getInt("price"));
+					productDto.setMade(rs.getString("made"));
+					productDto.setExpire(rs.getString("expire"));
+				}
+				else {
+					productDto = null;
+				}
+				con.close();
+				return productDto;
+			}
 }
 

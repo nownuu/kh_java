@@ -10,6 +10,7 @@ public class Test15 {
 	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		String student = sc.nextLine();
+		sc.close();
 		
 		ExamDao examDao = new ExamDao();
 		List<ExamDto> list = examDao.searchByStudent(student);

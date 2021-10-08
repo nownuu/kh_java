@@ -5,7 +5,7 @@ import java.util.List;
 import jdbc.beans.MemberDao;
 import jdbc.beans.MemberDto;
 
-public class Test19 {
+public class Test18_1 {
 	public static void main(String[] args) throws Exception {
 		//member 목록과 검색을 한 번에
 		//1. 검색분류와 검색어가 없으면 목록을 조회하여 출력

@@ -11,6 +11,7 @@ public class Test22 {
 		MemberDto memberDto = new MemberDto();
 		
 		Scanner sc = new Scanner(System.in);
+		System.out.println("아이디를 입력하십시오");
 		String memberID = sc.nextLine();
 		
 		// 아이디 검사

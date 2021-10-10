@@ -16,6 +16,7 @@ public class Nblog_3_1 {
 		height = sc.nextInt();
 		System.out.print("Weight : ");
 		 weight = sc.nextInt();
+
 		
 		sc.close();
 		

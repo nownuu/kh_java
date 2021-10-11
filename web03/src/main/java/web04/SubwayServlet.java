@@ -20,7 +20,7 @@ public class SubwayServlet extends HttpServlet{
 		if(age < 8 || age > 65) {
 			resp.getWriter().println("FREE USE Infants & elder");
 		} else if(age >= 20) {
-			resp.getWriter().println("Adult PRICE = 1,250");
+			resp.getWriter().println("Adult PRICE = 1250");
 		} else if(age >= 14) {
 			resp.getWriter().println("Teen PRICE = 720");
 		} else {

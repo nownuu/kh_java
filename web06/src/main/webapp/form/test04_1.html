@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>시험 정보 등록 페이지</title>
+</head>
+<body>
+	<form action="/web05/exam/insert.kh">
+		<h1> 시험 정보</h1>
+		<input type = "text" name = "student" placeholder = "학생명" required><br><br>
+		<select name ="subject">
+			<option value=""> 과목 선택 </option>
+			<option> 응용SW기초기술활용</option>
+			<option> 프로그래밍언어활용</option>
+			<option> 네트워크프로그래밍구현</option>
+			<option> 데이터입출력구현</option>
+			<option> SQL활용</option>
+			<option>요구사항확인</option>
+			<option>서버프로그래밍구현</option>
+		</select><br><br>
+		<select name ="type">
+			<option value =""> 유형 선택	</option>
+			<option> 서술형	</option>
+			<option> 문제해결시나리오	</option>
+			<option> 평가자체크리스트	</option>
+		</select><br><br>
+		<input type = "number" name = "score" placeholder = "시험 점수" required
+						min="0" max="100"><br><br>
+		<input type = "submit" value ="등록">
+	</form>
+</body>
+</html>

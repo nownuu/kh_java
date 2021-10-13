@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web05.beans.ExamDao;
-import web05.beans.ExamDto;
+import web05.beans.MemberDao;
+import web05.beans.MemberDto;
 
-@WebServlet(urlPatterns = "/exam/find.kh")
-public class ExamFindServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/member/find.kh")
+public class MemberFindServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -21,15 +21,16 @@ public class ExamFindServlet extends HttpServlet{
 			String keyword = req.getParameter("keyword");
 			
 			boolean searchMode = column != null && !column.equals("")
-					        	&&keyword != null && !keyword.equals("");
-			ExamDao examDao = new ExamDao();
-			List<ExamDto> list;
+								&& keyword != null && !keyword.equals("");
+			
+			MemberDao memberDao = new MemberDao();
+			List<MemberDto> list;
 			
 			if(searchMode) {
-				list = examDao.select(column, keyword);
+				list = memberDao.select(column, keyword);
 			}
 			else {
-				list = examDao.select();
+				list = memberDao.select();
 			}
 		}	catch(Exception e) {
 			e.printStackTrace();

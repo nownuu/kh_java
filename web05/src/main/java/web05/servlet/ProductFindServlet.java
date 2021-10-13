@@ -9,31 +9,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web05.beans.ExamDao;
-import web05.beans.ExamDto;
+import web05.beans.ProductDao;
+import web05.beans.ProductDto;
 
-@WebServlet(urlPatterns = "/exam/find.kh")
-public class ExamFindServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/product/find.kh")
+public class ProductFindServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			String column = req.getParameter("column");
-			String keyword = req.getParameter("keyword");
+			String keyword= req.getParameter("keyword");
 			
-			boolean searchMode = column != null && !column.equals("")
-					        	&&keyword != null && !keyword.equals("");
-			ExamDao examDao = new ExamDao();
-			List<ExamDto> list;
+			boolean searchMode = column != null && !column.equals("") 
+								&& keyword != null && !keyword.equals("");
+			
+			ProductDao productDao = new ProductDao();
+			List<ProductDto> list;
 			
 			if(searchMode) {
-				list = examDao.select(column, keyword);
+				list = productDao.select(column, keyword);
 			}
 			else {
-				list = examDao.select();
+				list = productDao.select();
 			}
 		}	catch(Exception e) {
+			resp.getWriter().println("ERROR");
 			e.printStackTrace();
-			resp.getWriter().print("ERROR");
 		}
 	}
 }

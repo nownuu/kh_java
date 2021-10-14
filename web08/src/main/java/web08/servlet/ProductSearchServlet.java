@@ -20,22 +20,26 @@ public class ProductSearchServlet extends HttpServlet{
 			String column = req.getParameter("column");
 			String keyword = req.getParameter("keyword");
 			
-			if(column == null || keyword ==null || column.equals("") || keyword.equals("")) {
-				throw new Exception();
-			}
+			boolean search = column != null && keyword != null;
 			
 			ProductDao productDao = new ProductDao();
-			List<ProductDto> list = productDao.select(column, keyword);
+			List<ProductDto> list;
+			if(search) {
+				list= productDao.select(column, keyword);
+			}
+			else {
+				list=productDao.select();
+			}
 			
 			resp.setCharacterEncoding("MS949");
 			resp.getWriter().println("검색 결과 : "+list.size());
 			for(ProductDto productDto : list) {
-			resp.getWriter().println("상품 번호"+productDto.getNo());
-			resp.getWriter().println("상품명"+productDto.getName());
-			resp.getWriter().println("상품 유형"+productDto.getType());
-			resp.getWriter().println("상품 가격"+productDto.getPrice());
-			resp.getWriter().println("제조 일자"+productDto.getMade());
-			resp.getWriter().println("유통 기한"+productDto.getExpire());
+			resp.getWriter().println("상품 번호 : "+productDto.getNo());
+			resp.getWriter().println("상품 명 : "+productDto.getName());
+			resp.getWriter().println("상품 유형 : "+productDto.getType());
+			resp.getWriter().println("상품 가격 : "+productDto.getPrice());
+			resp.getWriter().println("제조 일자 : "+productDto.getMade());
+			resp.getWriter().println("유통 기한 : "+productDto.getExpire());
 			}
 		}	catch(Exception e) {
 			e.printStackTrace();

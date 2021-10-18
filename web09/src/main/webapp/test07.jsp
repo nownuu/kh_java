@@ -31,11 +31,11 @@
 	<fieldset>
 		<legend>상품 검색</legend>
 			<select name="column">
-				<option value="name">
-				<option value="type">
+				<option value="name">이름</option>
+				<option value="type">유형</option>
 			</select>
 			<input type="search"  name="keyword" >
-			<input type="submit" name="검색">
+			<input type="submit" value="검색">
 	</fieldset>
 </form>
 
@@ -48,6 +48,7 @@
 				<th>상품 가격</th>
 				<th>제조 일자</th>
 				<th>유통 기한</th>
+				<th>메뉴</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,6 +60,10 @@
 				<td><%=productDto.getPrice() %></td>
 				<td><%=productDto.getMade().substring(0,10) %></td>
 				<td><%=productDto.getExpire().substring(0,10)  %></td>
+				<td>
+					<a href="test10.jsp?no=<%=productDto.getName() %>">
+							상세보기</a>
+				</td>
 			</tr>
 		<%}  %>
 		</tbody>

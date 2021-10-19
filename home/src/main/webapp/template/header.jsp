@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String ses = (String)session.getAttribute("ses");
+	boolean login = ses != null;
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,9 @@
 					<td>
 						<br>
 						<img src="/home/resource/image/kh_logo.jpg" width="250" height="50">
-						<h3>과정평가형 정보처리산업기사 취득과정</h3>
+						<h3>
+						과정평가형 정보처리산업기사 취득과정
+						</h3>
 					</td>
 				</tr>
 				<tr>
@@ -29,12 +32,21 @@
 					<%
 						String root = request.getContextPath();
 					%>
+					<!-- 
+					비회원 전용 메뉴 : 회원가입, 로그인, home, 게시판
+					회원 전용 메뉴 : 로그아웃, 내정보, home, 게시판
+					 -->
+					 <%if(login){ %>
+						<a href="<%=root %>/index.jsp">홈으로</a>
+						<a href="<%=root%>/member/logout.kh">로그아웃</a>
+						<a href="<%=root%>/member/mypage.jsp">내정보</a>
+						<a href="">게시판</a>
+					<%}	else{ %>
 						<a href="<%=root %>/index.jsp">홈으로</a>
 						<a href="<%=root %>/member/join.jsp">회원가입</a>
 						<a href="<%=root %>/member/login.jsp">로그인</a>
-						<a href="">로그아웃</a>
-						<a href="">내정보</a>
 						<a href="">게시판</a>
+					<%} %>
 					</td>
 				</tr>
 				<tr>

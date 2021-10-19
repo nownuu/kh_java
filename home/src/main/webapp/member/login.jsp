@@ -12,7 +12,7 @@
  		</tr>
   		<tr>
    			 <th>Pass Word</th>
-    		 <td><input type="text" name="memberPw" required></td>
+    		 <td><input type="password" name="memberPw" required></td>
   		</tr>
   </tbody>
   <tfoot>

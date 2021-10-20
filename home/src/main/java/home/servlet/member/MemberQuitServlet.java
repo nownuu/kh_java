@@ -13,17 +13,27 @@ import home.beans.MemberDao;
 @WebServlet(urlPatterns="/member/quit.kh")
 public class MemberQuitServlet extends HttpServlet{
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			req.setCharacterEncoding("UTF-8");
-			String memberId = (String)req.getSession().getAttribute("ses");
+			String memberId = (String)req.getSession().getAttribute("ses"); // 아이디 세션
+			String memberPw= req.getParameter("memberPw"); //비밀번호 파라미터
 			
+			// 처리 : 회원삭제+로그아웃
 			MemberDao memberDao = new MemberDao();
-			boolean result = memberDao.quit(memberId);
+			boolean success = memberDao.quit(memberId,memberPw);
 			
+			// success에 따라 성공 / 실패로 구분하여 처리
+			// = 성공이라면 로그아웃 후 완료페이지로 전송
+			// = 실패라면 로그아웃 처리를 하지 않고 이전 페이지로 오류 파라미터와 함께 전송
+			if(success) {
 			req.getSession().removeAttribute("ses");
 			resp.sendRedirect("quit_success.jsp");
 //			resp.sendRedirect(req.getContextPath()+"/member/quit_success.jsp");	
+			}
+			else {
+				resp.sendRedirect("check.jsp?error");
+			}
 		}	catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

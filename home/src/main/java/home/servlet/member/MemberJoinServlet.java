@@ -31,8 +31,9 @@ public class MemberJoinServlet extends HttpServlet {
 			memberDto.setMemberPw(req.getParameter("memberPw"));
 			memberDto.setMemberNick(req.getParameter("memberNick"));
 			memberDto.setMemberBirth(req.getParameter("memberBirth"));
-			memberDto.setMemberEmail(req.getParameter("memberEmail"));
 			memberDto.setMemberPhone(req.getParameter("memberPhone"));
+			memberDto.setMemberEmail(req.getParameter("memberEmail"));
+			
 			
 			MemberDao memberDao = new MemberDao();
 			memberDao.join(memberDto);

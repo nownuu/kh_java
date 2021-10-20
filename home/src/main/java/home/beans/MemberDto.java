@@ -1,4 +1,3 @@
-
 package home.beans;
 
 import java.sql.Date;
@@ -47,11 +46,23 @@ public class MemberDto {
 	public String getMemberEmail() {
 		return memberEmail;
 	}
+	public String getMemberEmailString() {
+		if(memberEmail == null) 
+			return "";
+		else
+			return memberEmail;
+	}
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
 	public String getMemberPhone() {
 		return memberPhone;
+	}
+	public String getMemberPhoneString() {
+		if(memberPhone == null)
+			return "";
+		else
+			return memberPhone;
 	}
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;

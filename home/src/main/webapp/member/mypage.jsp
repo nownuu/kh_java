@@ -52,6 +52,6 @@
 </table>
 
 <h3><a href="password.jsp">Change PassWord</a></h3>
-<h3><a href="#">Change Information</a></h3>
-<h3><a href="#">Unregister</a></h3>
+<h3><a href="edit.jsp">Change Information</a></h3>
+<h3><a href="quit.kh">SignOut</a></h3>
 <jsp:include page="/template/footer.jsp"></jsp:include>

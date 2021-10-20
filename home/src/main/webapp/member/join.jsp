@@ -5,7 +5,8 @@
     
     <h1>Membership</h1>
     
-  <form action="join.kh" method="post">
+  <form aciton="<%=request.getContextPath() %>/member/login.kh" method="post">
+<!--   <form action="join.kh" method="post"> -->
   
   	<table border ="0">
   		<tbody>

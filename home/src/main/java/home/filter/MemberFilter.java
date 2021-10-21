@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 		"/member/mypage.jsp",
 		"/member/edit.jsp",	"/member/edit.kh",	"/member/edit_success.jsp",
 		"/member/password.jsp", "/member/password.kh", "/member/password_success.jsp",
-		"/member/check.jsp", "/member/quit.kh"
+		"/member/check.jsp", "/member/quit.kh",
+		"/point/*"
 })
 public class MemberFilter implements Filter{
 	@Override
@@ -25,14 +26,14 @@ public class MemberFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		
+		//회원인지 아닌지 판정하는 코드
 		String memberId = (String)req.getSession().getAttribute("ses");
 		boolean login = memberId != null;
 		
-		if(login) {
+		if(login) {//회원이라면 --> 통과
 			chain.doFilter(request, response);
 		}
 		else {
-			//resp.sendRedirect(req.getContextPath()+"/member/login.jsp");
 			resp.sendError(401);
 		}
 	}

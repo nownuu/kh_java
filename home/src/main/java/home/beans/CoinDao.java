@@ -1,4 +1,3 @@
-
 package home.beans;
 
 import java.sql.Connection;
@@ -33,5 +32,30 @@ public class CoinDao {
 		con.close();
 		
 		return list;
+	}
+
+	public CoinDto get(int coinNo) throws Exception {
+		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		
+		String sql = "select * from coin where coin_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, coinNo);
+		ResultSet rs = ps.executeQuery();
+		
+		CoinDto coinDto;
+		if(rs.next()) {
+			coinDto = new CoinDto();
+			
+			coinDto.setCoinNo(rs.getInt("coin_no"));
+			coinDto.setCoinName(rs.getString("coin_name"));
+			coinDto.setCoinAmount(rs.getInt("coin_amount"));
+		}
+		else {
+			coinDto = null;
+		}
+		
+		con.close();
+		
+		return coinDto;
 	}
 }

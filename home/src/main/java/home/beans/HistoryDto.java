@@ -1,6 +1,6 @@
 package home.beans;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class HistoryDto {
 	private int historyNo;
@@ -10,7 +10,6 @@ public class HistoryDto {
 	private int historyAmount;
 	public HistoryDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getHistoryNo() {
 		return historyNo;

@@ -1,57 +1,108 @@
+<%@page import="home.beans.TotalHistoryDto"%>
+<%@page import="home.beans.TotalHistoryDao"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.Format"%>
+<%@page import="home.beans.HistoryDto"%>
+<%@page import="java.util.List"%>
+<%@page import="home.beans.HistoryDao"%>
 <%@page import="home.beans.MemberDto"%>
 <%@page import="home.beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/template/header.jsp"></jsp:include>
-<!-- 입력 : 현재 로그인한 회원 ID - String memberId -->
+<%-- 입력 : 현재 로그인한 회원ID - String memberId --%>
 <%
 	String memberId = (String)session.getAttribute("ses");
 %>
-<!-- 처리 : 회원정보(MemberDto)-->
+
+<%-- 처리 : 회원정보(MemberDto) --%>
 <%
 	MemberDao memberDao = new MemberDao();
 	MemberDto memberDto = memberDao.get(memberId);
+	
+// 	새롭게 만든 뷰(total_history)를 이용하여 포인트 이력을 조회
+	TotalHistoryDao historyDao = new TotalHistoryDao();
+	List<TotalHistoryDto> historyList = historyDao.findByMemberId(memberId);
 %>
 
-<h2>My Page</h2>
-<table border ="1" width="350">
+<%-- 출력 --%>
+<jsp:include page="/template/header.jsp"></jsp:include>
+
+<h2>회원 상세 정보</h2>
+
+<table border="1" width="300">
 	<tbody>
 		<tr>
-			<th width="45%">ID</th>
-			<td><%=memberDto.getMemberId() %></td>
+			<th width="25%">아이디</th>
+			<td><%=memberDto.getMemberId()%></td>
 		</tr>
 		<tr>
-			<th>Nick Name</th>
-			<td><%=memberDto.getMemberNick() %></td>
+			<th>닉네임</th>
+			<td><%=memberDto.getMemberNick()%></td>
 		</tr>
 		<tr>
-			<th>Birth</th>
-			<td><%=memberDto.getMemberBirth() %></td>
+			<th>생년월일</th>
+			<td><%=memberDto.getMemberBirth()%></td>
 		</tr>
 		<tr>
-			<th>E-mail</th>
-			<td><%=memberDto.getMemberEmail() %></td>
+			<th>이메일</th>
+			<td><%=memberDto.getMemberEmailString()%></td>
 		</tr>
 		<tr>
-			<th>Phone</th>
-			<td><%=memberDto.getMemberPhone() %></td>
+			<th>전화번호</th>
+			<td><%=memberDto.getMemberPhoneString()%></td>
 		</tr>
 		<tr>
-			<th>Membership Day</th>
-			<td><%=memberDto.getMemberJoin() %></td>
+			<th>가입일시</th>
+			<td><%=memberDto.getMemberJoin()%></td>
 		</tr>
 		<tr>
-			<th>Point</th>
-			<td><%=memberDto.getMemberPoint() %></td>
+			<th>포인트</th>
+			<td><%=memberDto.getMemberPoint()%></td>
 		</tr>
 		<tr>
-			<th>Grade</th>
-			<td><%=memberDto.getMemberGrade() %></td>
+			<th>등급</th>
+			<td><%=memberDto.getMemberGrade()%></td>
 		</tr>
 	</tbody>
 </table>
 
-<h3><a href="password.jsp">Change PassWord</a></h3>
-<h3><a href="edit.jsp">Change Information</a></h3>
-<h3><a href="quit.kh">SignOut</a></h3>
+<h3><a href="password.jsp">비밀번호 변경</a></h3>
+<h3><a href="edit.jsp">개인정보 변경</a></h3>
+<h3><a href="check.jsp">회원 탈퇴</a></h3>
+<!-- <h3><a href="quit.kh" onclick="return confirm('진짜 탈퇴?');">회원 탈퇴</a></h3> -->
+
+<hr>
+
+<!-- 포인트 내역 출력 -->
+<h2>포인트 상세 내역</h2>
+
+<table border="1" width="500">
+	<thead>
+		<tr>
+			<th>일시</th>
+			<th>금액</th>
+			<th>메모</th>
+			<th>cancel</th>
+			<th>취소</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%Format f = new DecimalFormat("#,##0"); %>
+		<%for(TotalHistoryDto historyDto : historyList) { %>
+		<tr>
+			<td align="center"><%=historyDto.getHistoryTime()%></td>
+			<td align="right"><%=f.format(historyDto.getHistoryAmount())%></td>
+			<td align="left"><%=historyDto.getHistoryMemo()%></td>
+			<td><%=historyDto.getCancel()%></td>
+			<td>
+				<%if(historyDto.available()){ %>
+				<a href="../point/cancel.kh?historyNo=<%=historyDto.getHistoryNo()%>">취소</a>
+				<a href="<%=request.getContextPath()%>/point/cancel.kh?historyNo=<%=historyDto.getHistoryNo()%>">취소</a>
+				<%} %>
+			</td>
+		</tr>
+		<%} %>
+	</tbody>
+</table>
+
 <jsp:include page="/template/footer.jsp"></jsp:include>

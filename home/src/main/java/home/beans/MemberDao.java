@@ -258,6 +258,38 @@ public class MemberDao {
 		
 		return memberDto;
 	}
+
+	public boolean addPoint(String memberId, int coinAmount) throws Exception {
+		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		
+		String sql = "update member "
+							+ "set member_point = member_point + ? "
+							+ "where member_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, coinAmount);
+		ps.setString(2, memberId);
+		int result = ps.executeUpdate();
+		
+		con.close();
+		
+		return result > 0;
+	}
+
+	public boolean refreshPoint(String memberId) throws Exception {
+		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		
+		String sql = "update member set member_point = ("
+								+ "select sum(history_amount) from history where member_id = ?"
+							+ ") where member_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, memberId);
+		ps.setString(2, memberId);
+		int result = ps.executeUpdate();
+		
+		con.close();
+		
+		return result > 0;
+	}
 	
 //	추가 기능에 대한 아이디어
 //	- 로그인 기능(Read)

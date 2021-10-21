@@ -23,12 +23,10 @@ public class MemberQuitServlet extends HttpServlet{
 			MemberDao memberDao = new MemberDao();
 			boolean success = memberDao.quit(memberId,memberPw);
 			
-			// success에 따라 성공 / 실패로 구분하여 처리
-			// = 성공이라면 로그아웃 후 완료페이지로 전송
-			// = 실패라면 로그아웃 처리를 하지 않고 이전 페이지로 오류 파라미터와 함께 전송
 			if(success) {
 			req.getSession().removeAttribute("ses");
 			resp.sendRedirect("quit_success.jsp");
+			
 //			resp.sendRedirect(req.getContextPath()+"/member/quit_success.jsp");	
 			}
 			else {

@@ -9,9 +9,8 @@ public class JdbcUtils {
 	public static Connection connect(String user, String password) throws Exception {
 		Class.forName("oracle.jdbc.OracleDriver");
 		Connection con = DriverManager.getConnection(
-							"jdbc:oracle:thin:@localhost:1521:xe", user, password);
+							"jdbc:oracle:thin:@127.0.0.1:1521:xe", user, password);
 		
-		System.out.println("! Oracle Login");
 		return con;
 	}
 }

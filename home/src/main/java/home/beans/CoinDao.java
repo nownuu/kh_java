@@ -1,3 +1,4 @@
+
 package home.beans;
 
 import java.sql.Connection;
@@ -9,23 +10,28 @@ import java.util.List;
 public class CoinDao {
 	public static final String USERNAME = "kh", PASSWORD = "kh";
 	
-	// 상품 목록
-	public List<CoinDto> list() throws Exception{
+	//coin 상품 전체 목록 조회
+	public List<CoinDto> list() throws Exception {
 		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
 		
-		String sql = "select * from coin";
+		String sql = "select * from coin order by coin_amount asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
-		List<CoinDto> coinList = new ArrayList<>();
+		//copy
+		List<CoinDto> list = new ArrayList<>();
 		while(rs.next()) {
 			CoinDto coinDto = new CoinDto();
-			coinDto.setCoinNo(rs.getInt("coinNo"));
-			coinDto.setCoinName(rs.getString("coinName"));
-			coinDto.setCoinAmount(rs.getInt("coinAmount"));
 			
-			coinList.add(coinDto);
+			coinDto.setCoinNo(rs.getInt("coin_no"));
+			coinDto.setCoinName(rs.getString("coin_name"));
+			coinDto.setCoinAmount(rs.getInt("coin_amount"));
+			
+			list.add(coinDto);
 		}
-		return coinList;
+		
+		con.close();
+		
+		return list;
 	}
 }

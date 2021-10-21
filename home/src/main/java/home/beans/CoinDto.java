@@ -22,6 +22,10 @@ public class CoinDto {
 	public void setCoinAmount(int coinAmount) {
 		this.coinAmount = coinAmount;
 	}
+	public CoinDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public String toString() {
 		return "CoinDto [coinNo=" + coinNo + ", coinName=" + coinName + ", coinAmount=" + coinAmount + "]";

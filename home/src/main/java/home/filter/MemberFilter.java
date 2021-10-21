@@ -10,7 +10,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = {
 		"/member/logout.kh",
@@ -23,13 +22,18 @@ public class MemberFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		HttpServletRequest req = (HttpServletRequest)request;
+		HttpServletResponse resp = (HttpServletResponse)response;
 		
-		HttpSession session = ((HttpServletRequest) request).getSession();
-		if(session.getAttribute("memberId") != null) {
+		String memberId = (String)req.getSession().getAttribute("ses");
+		boolean login = memberId != null;
+		
+		if(login) {
 			chain.doFilter(request, response);
 		}
 		else {
-			((HttpServletResponse) request).sendRedirect("/member/login.jsp");
+			//resp.sendRedirect(req.getContextPath()+"/member/login.jsp");
+			resp.sendError(401);
 		}
 	}
 }

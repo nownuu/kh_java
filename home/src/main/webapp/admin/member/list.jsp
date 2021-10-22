@@ -67,7 +67,7 @@
 		<%} %>
 		
 	</select>
-<%-- 	<input type="search" name="keyword" placeholder="검색어 입력" required value="<%=keyword == null ? "" : keyword%>"> --%>
+	
 	<%if(keyword == null){ %>
 	<input type="search" name="keyword" placeholder="검색어 입력" required>
 	<%}else{ %>
@@ -78,7 +78,6 @@
 
 <br>
 
-<%-- <%if(list.size() == 0){ %> --%>
 <%if(list.isEmpty()){ %>
 <h3>데이터가 존재하지 않습니다</h3>
 <%}else{ %>

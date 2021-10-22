@@ -19,22 +19,29 @@
 
 <h3>원하시는 상품을 선택하세요</h3>
 
-<table>
-	<tbody>
-		<%for(CoinDto coinDto : list){ %>
-		<tr>
-			<td><input type="radio" name="coinNo" value="<%=coinDto.getCoinNo() %>"></td>
-			<td><%=coinDto.getCoinName()%></td>
-			<td>(<%=coinDto.getCoinAmount()%> point)</td>
-		</tr>
-		<%} %>
-	</tbody>
-	<tfoot>
-		<tr align="right">
-			<td colspan="3">
-				충전버튼
-			</td>
-		</tr>
-	</tfoot>
-</table>
+<form action="charge.kh" method="post">
+
+	<table>
+		<tbody>
+			<%for(CoinDto coinDto : list){ %>
+			<tr>
+				<td><input type="radio" name="coinNo" value="<%=coinDto.getCoinNo()%>"></td>
+				<td><%=coinDto.getCoinName()%></td>
+				<td>(<%=coinDto.getCoinAmount()%> point)</td>
+			</tr>
+			<%} %>
+		</tbody>
+		<tfoot>
+			<tr align="center">
+				<td colspan="3">
+					<input type="submit" value="충전">
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+
+</form>
+
+
 <jsp:include page="/template/footer.jsp"></jsp:include>
+

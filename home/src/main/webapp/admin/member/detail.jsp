@@ -9,9 +9,9 @@
 <%@page import="home.beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- 입력 : 현재 로그인한 회원ID - String memberId --%>
+<%-- 입력 : 상세조회 할 회원 ID - String memberId --%>
 <%
-	String memberId = (String)session.getAttribute("ses");
+	String memberId = request.getParameter("memberId");
 %>
 
 <%-- 처리 : 회원정보(MemberDto) --%>
@@ -70,9 +70,8 @@
 	</tbody>
 </table>
 
-<h3><a href="password.jsp">비밀번호 변경</a></h3>
 <h3><a href="edit.jsp">개인정보 변경</a></h3>
-<h3><a href="check.jsp">회원 탈퇴</a></h3>
+<h3><a href="quit.kh?memberId=<%=memberDto.getMemberId()%>">강제 회원 탈퇴</a></h3>
 <!-- <h3><a href="quit.kh" onclick="return confirm('진짜 탈퇴?');">회원 탈퇴</a></h3> -->
 
 <hr>

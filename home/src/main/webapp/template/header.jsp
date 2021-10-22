@@ -47,7 +47,7 @@
 					<%if(login){ %>
 					<a href="<%=root%>/index.jsp">홈으로</a>
 					<a href="<%=root%>/member/logout.kh">로그아웃</a>
-					<a href="<%=root%>/member/mypage.jsp">내정보</a>
+					<a href="<%=root%>/member/mypage2.jsp">내정보</a>
 					<a href="<%=root%>/point/charge.jsp">[포인트충전]</a>
 					<a href="#">게시판</a>
 					<%}else{ %>

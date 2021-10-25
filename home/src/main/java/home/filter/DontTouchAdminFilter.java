@@ -23,6 +23,7 @@ public class DontTouchAdminFilter implements Filter{
 		HttpServletResponse resp = (HttpServletResponse)response;
 		try {
 			//목표 : 주어진 위치에서 파라미터로 전달되는 memberId가 관리자라면 차단
+			req.setCharacterEncoding("UTF-8");
 			String memberId = req.getParameter("memberId");
 			if(memberId != null) {//회원 아이디 파라미터가 존재한다면
 				//데이터베이스에서 해당 memberId의 회원 정보를 조회

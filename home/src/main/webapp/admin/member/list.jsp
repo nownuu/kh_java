@@ -67,7 +67,7 @@
 		<%} %>
 		
 	</select>
-	
+<%-- 	<input type="search" name="keyword" placeholder="검색어 입력" required value="<%=keyword == null ? "" : keyword%>"> --%>
 	<%if(keyword == null){ %>
 	<input type="search" name="keyword" placeholder="검색어 입력" required>
 	<%}else{ %>
@@ -78,6 +78,7 @@
 
 <br>
 
+<%-- <%if(list.size() == 0){ %> --%>
 <%if(list.isEmpty()){ %>
 <h3>데이터가 존재하지 않습니다</h3>
 <%}else{ %>
@@ -103,7 +104,7 @@
 			<td><%=memberDto.getMemberGrade()%></td>
 			<td>
 				<a href="detail.jsp?memberId=<%=memberDto.getMemberId()%>">상세</a>
-				<a href="">수정</a>
+				<a href="edit.jsp?memberId=<%=memberDto.getMemberId()%>">수정</a>
 				<a href="quit.kh?memberId=<%=memberDto.getMemberId()%>">탈퇴</a>
 			</td>
 		</tr>
@@ -113,3 +114,4 @@
 <%} %>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
+

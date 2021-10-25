@@ -70,9 +70,8 @@
 	</tbody>
 </table>
 
-<h3><a href="edit.jsp">개인정보 변경</a></h3>
-<h3><a href="quit.kh?memberId=<%=memberDto.getMemberId()%>">강제 회원 탈퇴</a></h3>
-<!-- <h3><a href="quit.kh" onclick="return confirm('진짜 탈퇴?');">회원 탈퇴</a></h3> -->
+<h3><a href="edit.jsp?memberId=<%=memberDto.getMemberId()%>">회원 정보 변경</a></h3>
+<h3><a href="quit.kh?memberId=<%=memberDto.getMemberId()%>">회원 강제 탈퇴</a></h3>
 
 <hr>
 

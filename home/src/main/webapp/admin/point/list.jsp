@@ -21,6 +21,11 @@
 <table border="1" width="500">
 	<thead>
 		<tr>
+			<th>
+				<a href="./">상품 추가</a>
+			</th>
+		</tr>
+		<tr>
 			<th>상품번호</th>
 			<th>상품이름</th>
 			<th>상품금액</th>
@@ -35,8 +40,8 @@
 			<td><%=coinDto.getCoinName()%></td>
 			<td align="right"><%=f.format(coinDto.getCoinAmount())%></td>
 			<td>
-				수정
-				삭제
+				<a href="./edit.jsp?coinNo=<%=coinDto.getCoinNo()%>">수정</a>
+				<a href="./delete.kh?coinNo=<%=coinDto.getCoinNo() %>">삭제</a>
 			</td>
 		</tr>
 		<%} %>

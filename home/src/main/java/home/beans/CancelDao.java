@@ -5,10 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class CancelDao {
-	public static final String USERNAME = "kh", PASSWORD = "kh";
 	
 	public void insert(int historyNo) throws Exception {
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "insert into cancel values(?)";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -19,7 +18,7 @@ public class CancelDao {
 	}
 	
 	public boolean available(int historyNo) throws Exception {
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "select * from cancel where history_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);

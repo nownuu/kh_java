@@ -1,3 +1,5 @@
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="home.beans.BoardDto"%>
 <%@page import="home.beans.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,6 +14,38 @@
 	String memberId = (String)session.getAttribute("ses"); 
 
 	BoardDao boardDao = new BoardDao();
+/* 
+	조회수 중복 방지에 대한 시나리오
+	1. 본인 글에 대한 조회 수 증가를 방지한다.
+	2. 한 번 읽은 글에 대한 추가 조회 수 증가를 방지한다.
+		= 세션에 사용자가 읽은 글 번호를 추가하여 관리하도록 구현
+	3. IP를 이용한 조회 수 증가를 방지한다.
+		= 접속자 IP 확인 명령을 통한 IP 비교
+		=  사용자에게 반드시 이용 고지를 해야함(IP는 개인정보)
+		= 전체 사용자에게 영향을 줄 수 있는 저장소가 필요
+		
+*/ 
+	
+//1. boardViewedNo 라는 이름의 저장소를 세션에서 꺼내어 본다.
+	Set<Integer> boardViewedNo = (Set<Integer>)session.getAttribute("boardViewedNo");
+	
+	//2. boardViewedNo 가 null 이면 "처음 글을 읽는 상태"임을 말하므로 저장소를 신규로 생성
+	if(boardViewedNo == null){
+		boardViewedNo = new HashSet<>();
+		System.out.println("처음으로 글을 읽기 시작했습니다(저장소 생성)");
+	}
+	
+	//3. 현재 글 번호를 저장소에 추가해본다
+	//3-1. 추가가 된다면 이 글은 처음 읽는 글
+	//3-2. 추가가 안된다면 이 글은 두 번 이상 읽은 글
+	if(boardViewedNo.add(boardNo)){//처음 읽은 글인 경우
+		boardDao.readUp(boardNo, memberId);//조회수 증가(남에 글일때만)
+		System.out.println("이 글은 처음 읽는 글입니다");
+	}	else{
+		System.out.println("이 글은 읽은 적이 있습니다");
+	}
+	System.out.println("저장소 : "+boardViewedNo);
+	
 	boardDao.readUp(boardNo, memberId);//조회수 증가(남에 글일때만)
 	BoardDto boardDto = boardDao.get(boardNo);//단일조회
 	

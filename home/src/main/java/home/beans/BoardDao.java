@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDao {
-	public static final String USERNAME = "kh", PASSWORD = "kh";
 	
 	public List<BoardDto> search(String column, String keyword) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		String sql = "select * from board where instr(#1, ?) > 0 order by #1 a"
 				+ "sc";
 		sql = sql.replace("#1", column);
@@ -40,7 +39,7 @@ public class BoardDao {
 	}
 	
 	public List<BoardDto> list() throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "select * from board order by board_no desc"; //최신순
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -69,7 +68,7 @@ public class BoardDao {
 	}
 	
 	public BoardDto get(int boardNo) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "select * from board where board_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -95,7 +94,7 @@ public class BoardDao {
 	}
 	// 글 쓰기 1
 	public void write(BoardDto boardDto) throws Exception {
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, sysdate, 0, 0, 0, 0, 0)";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -109,7 +108,7 @@ public class BoardDao {
 	}
 	//조회수 증가 기능
 	public boolean readUp(int boardNo, String memberId) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql ="update board set board_read = board_read+1 where board_no=? and board_writer != ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -123,7 +122,7 @@ public class BoardDao {
 	
 	// 번호 생성 기능 : 번호를 미리 생성해두어야 할 필요가 있는 경우 사용
 	public int getSequence() throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "select board_seq.nextval from dual";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -139,7 +138,7 @@ public class BoardDao {
 	
 	// 글쓰기 2 - 번호를 알아내면서 등록하는 방법
 	public void write2(BoardDto boardDto) throws Exception {
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "insert into board values(?, ?, ?, ?, sysdate, 0, 0, 0, 0, 0)";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -155,7 +154,7 @@ public class BoardDao {
 	
 	// 삭제
 	public boolean delete(int boardNo) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "delete board where board_no =?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -168,7 +167,7 @@ public class BoardDao {
 	}
 	// 수정
 	public boolean edit(BoardDto boardDto) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "update board set board_title=?, board_content=? where board_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);

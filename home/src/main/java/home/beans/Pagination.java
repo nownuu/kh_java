@@ -43,7 +43,6 @@ public class Pagination {
 	private int begin, end;
 	private int startBlock, finishBlock, lastBlock;
 	private List<BoardDto> list;
-	
 	public void calculate() throws Exception {
 		//count 계산
 		BoardDao boardDao = new BoardDao();
@@ -68,7 +67,8 @@ public class Pagination {
 			this.list = boardDao.searchByRownum(column, keyword, begin, end);
 		}
 		else {
-			this.list = boardDao.listByRownum(begin, end);
+			//this.list = boardDao.listByRownum(begin, end);//일반
+			this.list = boardDao.listByTreeSort(begin, end);//계층형
 		}
 	}
 	public int getPage() {
@@ -105,18 +105,17 @@ public class Pagination {
 		return lastBlock;
 	}
 	
-	//추가 : 이전이 존재하나요?
+	//추가 : 이전이 존재?
 	public boolean isPreviousAvailable() {
 		return this.startBlock > 1;
 	}
-	//추가 : 다음이 존재하나요?
+	//추가 : 다음이 존재?
 	public boolean isNextAvailable() {
 		return this.finishBlock < this.lastBlock; 
 	}
-	//추가 : 검색모드인가요?
+	//추가 : 검색모드?
 	public boolean isSearch() {
-		return this.column != null && !this.column.equals("") 
-					&& this.keyword != null && !this.keyword.equals("");
+		return this.column != null && !this.column.equals("") && this.keyword != null && !this.keyword.equals("");
 	}
 	//추가 : 진짜 마지막 블록 번호 반환
 	public int getRealLastBlock() {

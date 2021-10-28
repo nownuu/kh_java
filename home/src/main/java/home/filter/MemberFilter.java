@@ -34,7 +34,8 @@ public class MemberFilter implements Filter{
 		if(login) {//회원이라면 --> 통과
 			chain.doFilter(request, response);
 		}
-		else {
+		else {//회원이 아니라면 --> 로그인 페이지로 강제이동
+			//resp.sendRedirect(req.getContextPath()+"/member/login.jsp");
 			resp.sendError(401);
 		}
 	}

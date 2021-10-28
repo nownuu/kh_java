@@ -17,9 +17,9 @@ public class BoardReplyEditServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			ReplyDto replyDto = new ReplyDto();
-			replyDto.setBoardNo(Integer.parseInt(req.getParameter("replyNo")));
-			replyDto.setReplyContent(req.getParameter("replyContent"));
 			replyDto.setReplyNo(Integer.parseInt(req.getParameter("replyNo")));
+			replyDto.setBoardNo(Integer.parseInt(req.getParameter("boardNo")));
+			replyDto.setReplyContent(req.getParameter("replyContent"));
 			
 			ReplyDao replyDao = new ReplyDao();
 			boolean success = replyDao.edit(replyDto);
@@ -30,7 +30,8 @@ public class BoardReplyEditServlet extends HttpServlet{
 			else {
 				resp.sendError(404);
 			}
-			} catch(Exception e) {
+			} 
+			catch(Exception e) {
 				e.printStackTrace();
 				resp.sendError(500);
 			}

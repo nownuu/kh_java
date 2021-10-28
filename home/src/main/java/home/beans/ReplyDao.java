@@ -12,7 +12,7 @@ public class ReplyDao {
 	public List<ReplyDto> list(int boardNo) throws Exception {
 		Connection con = JdbcUtils.connect2();
 		
-		String sql = "select * from reply where board_no = ? order by reply_no desc";
+		String sql = "select * from reply where board_no=? order by reply_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, boardNo);
 		ResultSet rs = ps.executeQuery();
@@ -37,28 +37,31 @@ public class ReplyDao {
 		return list;
 	}
 	
-	// 댓글 삽입
-	public void insert(ReplyDto replyDto) throws Exception {
+	//댓글 등록 기능
+	public void insert(ReplyDto replyDto) throws Exception{
 		Connection con = JdbcUtils.connect2();
-		String sql = "insert into reply values(req_seq.nextval,?,?,?,sysdate,0,0,0)";
+		
+		String sql = "insert into reply values(reply_seq.nextval, ?, ?, ?, sysdate, 0, 0, 0)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, replyDto.getBoardNo());
 		ps.setString(2, replyDto.getReplyWriter());
 		ps.setString(3, replyDto.getReplyContent());
 		ps.execute();
+		
 		con.close();
 	}
 
 	// 댓글 삭제
 	public boolean delete(int replyNo) throws Exception {
 		Connection con = JdbcUtils.connect2();
-		String sql = "delete into reply where reply_no = ?";
+		String sql = "delete into reply where reply_no= ";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, replyNo);
 		int result = ps.executeUpdate();
 		con.close();
 		return result > 0;
 	}
+	
 	// 댓글 수정
 	public boolean edit(ReplyDto replyDto) throws Exception{
 		Connection con = JdbcUtils.connect2();

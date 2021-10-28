@@ -12,14 +12,15 @@ import home.beans.BoardDao;
 import home.beans.ReplyDao;
 import home.beans.ReplyDto;
 
-@WebServlet(urlPatterns="/board/reply/insert.kh")
+@WebServlet(urlPatterns = "/board/reply/insert.kh")
 public class BoardReplyInsertServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			//입력 : ReplyDto(파라미터 : boardNo + replyContent , 세션 : replyWriter)
 			ReplyDto replyDto = new ReplyDto();
 			replyDto.setBoardNo(Integer.parseInt(req.getParameter("boardNo")));
-			replyDto.setReplyNo(Integer.parseInt(req.getParameter("replyContent")));
+			replyDto.setReplyContent(req.getParameter("replyContent"));
 			
 			replyDto.setReplyWriter((String)req.getSession().getAttribute("ses"));
 			
@@ -30,9 +31,9 @@ public class BoardReplyInsertServlet extends HttpServlet{
 			BoardDao boardDao = new BoardDao();
 			boolean success = boardDao.refreshReplyCount(replyDto.getBoardNo());
 			
-			// 출력
+			//출력
 			resp.sendRedirect("../detail.jsp?boardNo="+replyDto.getBoardNo());
-//			resp.sendRedirect(req.getContentPath()+"/board/detail.jsp?boardNo="+replyDto.getBoardNo());
+			//resp.sendRedirect(req.getContextPath()+"/board/detail.jsp?boardNo="+replyDto.getBoardNo());
 		}	catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

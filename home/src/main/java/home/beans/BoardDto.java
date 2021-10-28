@@ -76,10 +76,14 @@ public class BoardDto {
 	public void setBoardDepth(int boardDepth) {
 		this.boardDepth = boardDepth;
 	}
-	// 추가
+	// 추가 : 댓글이 존재하는지?
 	public boolean isReplyExist() {
 		return this.boardReply > 0;
 	}
+	//추가 : 답변글인지 확인 메소드
+		public boolean hasDepth() {
+			return this.boardDepth > 0;
+		}
 	@Override
 	
 	public String toString() {

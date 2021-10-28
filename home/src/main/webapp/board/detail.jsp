@@ -1,12 +1,31 @@
 <%@page import="home.beans.ReplyDto"%>
-<%@page import="home.beans.ReplyDao"%>
 <%@page import="java.util.List"%>
+<%@page import="home.beans.ReplyDao"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="home.beans.BoardDto"%>
 <%@page import="home.beans.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%-- 번외 : 수정 버튼을 눌렀을 때 처리되도록 구현하는 스크립트(나중에 배움) --%>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(function(){
+		$(".view-row").find(".edit-btn").click(function(){
+			$(this).parents("tr.view-row").hide();
+			$(this).parents("tr.view-row").next("tr.edit-row").show();
+		});
+		
+		$(".edit-row").find(".edit-cancel-btn").click(function(){
+			$(this).parents("tr.edit-row").hide();
+			$(this).parents("tr.edit-row").prev("tr.view-row").show();
+		});
+		
+		$(".edit-row").hide();
+	});
+</script>    
+
 <%-- 입력 : 게시글번호(boardNo) --%>
 <%
 	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
@@ -63,10 +82,11 @@
 %>
 
 <%
-	// 현재 게시글에 대한 댓글을 조회
+	//현재 게시글에 대한 댓글을 조회
 	ReplyDao replyDao = new ReplyDao();
 	List<ReplyDto> replyList = replyDao.list(boardNo);
 %>
+
 <%-- 출력 --%>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
@@ -101,6 +121,7 @@
 		<tr>
 			<td align="right">
 				<a href="write.jsp">글쓰기</a>
+				<a href="write.jsp?boardSuperno=<%=boardDto.getBoardNo()%>">답글쓰기</a>
 				<a href="list.jsp">목록보기</a>
 				
 				<%if(owner){ %>
@@ -148,7 +169,7 @@
 				boolean myReply = memberId.equals(replyDto.getReplyWriter());
 				boolean ownerReply = boardDto.getBoardWriter().equals(replyDto.getReplyWriter());
 			%>
-			<tr>
+			<tr class="view-row">
 				<td width="30%">
 					<%=replyDto.getReplyWriter()%>
 					<%-- 게시글 작성자의 댓글에는 표시 --%>
@@ -165,23 +186,28 @@
 				<td width="15%">
 				<%-- 현재 사용자가 작성한 글에만 수정, 삭제를 표시 --%>
 				<%if(myReply){ %>
-				수정 | 
+				<a class="edit-btn">수정</a> | 
 				<a href="reply/delete.kh?boardNo=<%=replyDto.getBoardNo()%>&replyNo=<%=replyDto.getReplyNo()%>">삭제</a>
 				<%} %>
 				</td>
 			</tr>
+			
 			<%-- 본인 글일 경우 수정을 위한 공간을 추가적으로 생성 --%>
 			<%if(myReply){ %>
-			<tr>
+			<tr class="edit-row">
 				<td colspan="3">
-				<form action="reply/edit.kh" method="post">
-					<input type="hidden" name="replyNo" value="<%=replyDto.getReplyNo() %>">
-					<input type="hidden" name="boardNo" value="<%=replyDto.getBoardNo() %>">
-					<textarea name="replyContents" rows="4" cols="80"><%=replyDto.getReplyContent() %></textarea>
-					<input type="submit" value="수정">
-				</form>
+					<form action="reply/edit.kh" method="post">
+						<input type="hidden" name="replyNo" value="<%=replyDto.getReplyNo()%>">
+						<input type="hidden" name="boardNo" value="<%=replyDto.getBoardNo()%>">
+						<textarea name="replyContent" required rows="4" cols="80"><%=replyDto.getReplyContent()%></textarea>
+						<input type="submit" value="수정">
+						<a class="edit-cancel-btn">취소</a>
+					</form>
+				</td>
 			</tr>
-			<%}} %>
+			<%} %>
+			
+			<%} %>
 		</tbody>
 	</table>
 <%} %>

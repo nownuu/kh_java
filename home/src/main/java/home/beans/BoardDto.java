@@ -76,7 +76,12 @@ public class BoardDto {
 	public void setBoardDepth(int boardDepth) {
 		this.boardDepth = boardDepth;
 	}
+	// 추가
+	public boolean isReplyExist() {
+		return this.boardReply > 0;
+	}
 	@Override
+	
 	public String toString() {
 		return "BoardDto [boardNo=" + boardNo + ", boardWriter=" + boardWriter + ", boardTitle=" + boardTitle
 				+ ", boardTime=" + boardTime + ", boardRead=" + boardRead + ", boardReply=" + boardReply

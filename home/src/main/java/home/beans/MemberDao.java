@@ -9,7 +9,6 @@ import java.util.List;
 //member 테이블에 접근하는 객체
 public class MemberDao {
 	
-	
 	//[1] 회원가입 메소드
 	public void join(MemberDto memberDto) throws Exception {
 		Connection con = JdbcUtils.connect2();
@@ -39,7 +38,7 @@ public class MemberDao {
 		String sql = "update member "
 							+ "set "
 								+ "member_nick = ?, "
-								+ "member_birth = ?,"
+								+ "member_birth = to_date(?, 'YYYY-MM-DD'),"
 								+ "member_email = ?,"
 								+ "member_phone = ? "
 							+ "where "
@@ -277,8 +276,9 @@ public class MemberDao {
 	public boolean refreshPoint(String memberId) throws Exception {
 		Connection con = JdbcUtils.connect2();
 		
+		//total_history_record는 view이며, history와 cancel을 취합하여 순서대로 조회하도록 구현되어 있다.
 		String sql = "update member set member_point = ("
-								+ "select sum(history_amount) from history where member_id = ?"
+								+ "select sum(history_amount) from total_history_record where member_id = ?"
 							+ ") where member_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, memberId);
@@ -289,7 +289,7 @@ public class MemberDao {
 		
 		return result > 0;
 	}
-	
+
 	//관리자용 수정 기능
 	public boolean editByAdmin(MemberDto memberDto) throws Exception{
 		Connection con = JdbcUtils.connect2();
@@ -317,26 +317,31 @@ public class MemberDao {
 		
 		return result > 0;
 	}
-	// 회원 등급별 포인트 보유량 조회 기능(통계기능)
-	//=MemberDto 외에 필요한 내용이 있다면 별도의 클래스를 만들어서 처리
-	//=DTO는 테이블과 동일한 형태로 만들어야한다.
-	//=이러한 경우 DTO말고 VO를 만들어서 사용한다. (Value Object)
-	//=VO는 자유로은ㄴ 형태로 만들수 있다.
-	public List<GroupPointVO> pointByGrade() throws Exception{
+	
+	//회원등급별 포인트 보유량 조회 기능(통계기능)
+	//= MemberDto 외에 필요한 내용이 있다면 별도의 클래스를 만들어서 처리
+	//= DTO는 테이블과 동일한 형태로 만들어야 한다.
+	//= 이러한 경우 DTO 말고 VO를 만들어서 사용한다(Value Object)
+	//= VO는 자유로운 형태로 만들 수 있다.
+	//= DTO와 VO를 구분하지 않는 경우도 많이 있다.
+	public List<GroupPointVO> pointByGrade() throws Exception {
 		Connection con = JdbcUtils.connect2();
-		String sql ="select member_grade, sum(member_point) \"total\" from member\r\n"
-				+ "	group by member_grade order by \"total\" desc";
+		
+		String sql = "select member_grade, sum(member_point) total from member "
+									+ "group by member_grade order by total desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
-		List<GroupPointVO> list = new ArrayList();
+		List<GroupPointVO> list = new ArrayList<>();
 		while(rs.next()) {
 			GroupPointVO vo = new GroupPointVO();
 			vo.setMemberGrade(rs.getString("member_grade"));
 			vo.setTotal(rs.getInt("total"));
 			list.add(vo);
 		}
+		
 		con.close();
+		
 		return list;
 	}
 	
@@ -348,3 +353,16 @@ public class MemberDao {
 //		1. 마지막 접속시각만 알고 싶고 나머진 다 없어져도 되면 컬럼 1개를 추가하여 해결
 //		2. 여태까지의 모든 접속시각을 알고 싶다면 기록할 하위테이블을 하나 만들어서 해결
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

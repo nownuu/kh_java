@@ -36,6 +36,12 @@
 <table border="1" width="300">
 	<tbody>
 		<tr>
+			<th>프로필 사진</th>
+			<td>
+				<input type="file" name = "attach">
+			</td>
+		</tr>
+		<tr>
 			<th width="25%">아이디</th>
 			<td><%=memberDto.getMemberId()%></td>
 		</tr>

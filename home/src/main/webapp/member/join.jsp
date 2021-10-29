@@ -6,7 +6,7 @@
     <h1>Membership</h1>
     
 <%--   <form action="<%=request.getContextPath() %>/member/join.kh" method="post"> --%>
-  <form action="join.kh" method="post">
+  <form action="join.kh" method="post" enctype="multipart /form-data">
   
   	<table border ="0">
   		<tbody>
@@ -33,6 +33,10 @@
   			<tr>
   				<th>E-mail</th>
   				<td><input type="email" name ="memberEmail"></td>
+  			</tr>
+  			<tr>
+  				<th>Profile</th>
+  				<td><input type="file" name="attach" accept="image/*"></td>
   			</tr>
   		</tbody>
   	</table>

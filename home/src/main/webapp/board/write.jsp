@@ -35,6 +35,13 @@
 				<textarea name="boardContent" required rows="10" cols="60"></textarea>
 			</td>
 		</tr>
+		<!-- 첨부파일 -->
+		<tr>
+			<th>첨부</th>
+			<td>
+				<input type="file" name="attach">
+			</td>
+		</tr>
 	</tbody>
 	<tfoot>
 		<tr>

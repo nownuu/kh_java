@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <style>
+
+        textarea{
+            resize: none;
+        }
+        textarea.vertical{
+            resize: vertical;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-700 container-center">
+        <div class="row center">
+            <h1>새 글 작성</h1>
+        </div>
+        <div class="row">
+            <label>제목</label>
+            <input type="text" name="" required class="form-input" autocomplete="off">
+        </div>
+        <div class="row">
+            <label>내용</label>
+            <textarea name="" required class="form-input"></textarea>
+        </div>
+        <div class="row">
+            <label class="form-block">첨부파일</label>
+            <input type="file" name="" class="form-input">
+        </div>
+        <div>
+            <input class="form-btn" type="submit" value="게시글 등록">
+        </div>
+    </div>
+</body>
+</html>

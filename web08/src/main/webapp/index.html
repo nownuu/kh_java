@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Product PAGE</title>
+
+</head>
+<body>
+	<h1> MAIN PAGE</h1>
+	<h5><a href = "./product/list.html">상품 정보 목록</a></h5>
+	 <h5><a href = "./product/detail.html">상품 정보 상세 조회</a></h5>
+	 <form action="./product/detil.kh">
+	 <fieldset><legend>상품 상세보기</legend>
+	 	<input type="text" name="name" required placeholder="상품명">
+		<input type="submit" value="조회">
+	 </fieldset></form>
+	 
+<!-- <h5><a href = "./product/search.html">상품 정보 검색</a></h5> -->
+	<form action = "./product/search.kh">
+		<fieldset><legend>상품검색</legend>
+		<select name="column">
+			<option value="name">이름</option>
+			<option value="type">유형</option>
+		</select>
+			<input type="text" name="keyword" placeholder="검색어" required>
+			<input type="submit" value="검색"></fieldset></form>
+
+	
+	<h5><a href = "./product/insert.html">상품 등록</a></h5>
+	
+	<h5><a href = "./product/update.html">상품 수정</a></h5>
+	
+	<!--  <h5><a href = "product/delete.html">상품 정보 삭제</a></h5>-->
+	<form action="./product/delete.kh">
+	<fieldset><legend>상품 삭제</legend>
+		<input type="text" name="name" placeholder = "상품명" required>
+		<input type="submit" value="삭제">
+	</fieldset>
+		</form>
+		
+</body>
+</html>

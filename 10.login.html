@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- commons.css를 연결하는 코드 -->
+    <link rel="stylesheet" type="text/css" href="./commos.css">
+    <style>
+        /* 
+            form 입력요소 스타일링
+            = .form-input은 입력창
+            = .form-btn은 버튼
+            = 기본적으로 100%의 폭을 가지도록 설정
+        */
+        .form-input, .form-btn{
+            width: 100%;
+            font-size: 20px;
+            padding: 10px;
+        }
+        .form-input{
+            border: 1px solid rgb(41, 34, 46);
+        }
+        .form-btn{
+            background-color: rgb(41, 34, 46);
+            color: lavender;
+            font-weight: bold;
+        }
+        /* 
+            정렬 스타일링
+            .left = 왼쪽 정렬
+            .center = 가운데 정렬
+            .right = 오른쪽 정렬
+        */
+        .left{
+            text-align: left;
+        }
+        .center{
+            text-align: center;
+        }
+        .right{
+            text-align: right;
+        }
+        /* 
+            영역 배치
+            .container-left = 영역 왼쪽 배치
+            .container-center = 영역 가운데 배치
+            .container-right = 영역 오른쪽 배치
+        */
+        .container-left {
+            margin-left: 0;
+            margin-right: auto;
+        }
+        .container-center {
+            margin-left: auto;
+            margin-right:auto;
+        }
+        .container-right {
+            margin-left: auto;
+            margin-right:0;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div class="container-500 container-center">
+            <div class="row center">
+                <h1>Login</h1>
+            </div>
+            <hr>
+            <div class="row">
+                <input class="form-input" type="text" name="memberId" placeholder="이메일" required>
+            </div>
+            <div class="row">
+                 <input class="form-input" type="password" name="memberPw" placeholder="비밀번호" required>
+            </div>
+            <div class="row">
+                 <input class="form-btn" type="submit" value="로그인">
+            </div>
+        </div>
+    </form>
+</body>
+</html>
